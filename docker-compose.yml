@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:8.3-cli
+    container_name: hospital-sys-app
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8080:8080"
+    command: php -S 0.0.0.0:8080 -t public
+    depends_on:
+      - db
+    networks:
+      - hospital-network
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=hospital_sys
+      - DB_USERNAME=hospital_user
+      - DB_PASSWORD=hospital_pass
+
+  db:
+    image: mysql:8.0
+    container_name: hospital-sys-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: hospital_sys
+      MYSQL_USER: hospital_user
+      MYSQL_PASSWORD: hospital_pass
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - hospital-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: hospital-sys-phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - db
+    networks:
+      - hospital-network
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  hospital-network:
+    driver: bridge

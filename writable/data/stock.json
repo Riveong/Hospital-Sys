@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Paracetamol",
+        "price": 5000,
+        "stock": 100,
+        "unit": "box"
+    },
+    {
+        "id": 2,
+        "name": "Amoxicillin",
+        "price": 15000,
+        "stock": 50,
+        "unit": "box"
+    },
+    {
+        "id": 3,
+        "name": "Vitamin C",
+        "price": 8000,
+        "stock": 75,
+        "unit": "bottle"
+    },
+    {
+        "id": 4,
+        "name": "Antibiotic",
+        "price": 25000,
+        "stock": 30,
+        "unit": "box"
+    },
+    {
+        "id": 5,
+        "name": "Cough Syrup",
+        "price": 12000,
+        "stock": 60,
+        "unit": "bottle"
+    }
+]
